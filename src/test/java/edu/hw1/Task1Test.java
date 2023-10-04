@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class SampleTestTask1 {
+public class Task1Test {
     @Test
     @DisplayName("minutesToSecondsTest_1")
     void minutesToSecondsTest_1() {

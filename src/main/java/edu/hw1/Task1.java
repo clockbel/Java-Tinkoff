@@ -16,7 +16,6 @@ public class Task1 {
                 } catch (NumberFormatException ignored) {
                 }
             }
-
         }
         return timeSeconds;
     }
