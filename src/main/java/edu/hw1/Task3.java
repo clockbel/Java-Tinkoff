@@ -1,14 +1,17 @@
 package edu.hw1;
 
-public class Task3 {
+public final class Task3 {
+    private Task3() {
+    }
+
     public static boolean isNestable(int[] array1, int[] array2) {
         boolean ans = false;
         if (array1.length > 1 && array2.length > 1) {
-            int max_a1 = findMax(array1);
-            int max_a2 = findMax(array2);
-            int min_a1 = findMin(array1);
-            int min_a2 = findMin(array2);
-            if (min_a1 > min_a2 && max_a1 < max_a2) {
+            int maxArray1 = findMax(array1);
+            int maxArray2 = findMax(array2);
+            int minArray1 = findMin(array1);
+            int minArray2 = findMin(array2);
+            if (minArray1 > minArray2 && maxArray1 < maxArray2) {
                 ans = true;
             }
         }
@@ -16,22 +19,22 @@ public class Task3 {
     }
 
     private static int findMax(int[] array) {
-        int max_a = array[0];
+        int maxArray = array[0];
         for (int j : array) {
-            if (max_a < j) {
-                max_a = j;
+            if (maxArray < j) {
+                maxArray = j;
             }
         }
-        return max_a;
+        return maxArray;
     }
 
     private static int findMin(int[] array) {
-        int min_a = array[0];
+        int minArray = array[0];
         for (int j : array) {
-            if (min_a > j) {
-                min_a = j;
+            if (minArray > j) {
+                minArray = j;
             }
         }
-        return min_a;
+        return minArray;
     }
 }

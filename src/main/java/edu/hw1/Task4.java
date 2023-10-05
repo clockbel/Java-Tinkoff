@@ -1,7 +1,9 @@
 package edu.hw1;
 
-public class Task4 {
-    public Task4() {}
+public final class Task4 {
+    private Task4() {
+    }
+
     public static String fixString(String str) {
         char[] oldStr = str.toCharArray();
         char temp = '\0';

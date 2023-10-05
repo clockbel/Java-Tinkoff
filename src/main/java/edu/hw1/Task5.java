@@ -1,6 +1,9 @@
 package edu.hw1;
 
-public class Task5 {
+public final class Task5 {
+    private Task5() {
+    }
+
     public static boolean isPalindromeDescendant(int number) {
         String numStr = String.valueOf(number);
         boolean flag = false;
@@ -40,9 +43,5 @@ public class Task5 {
             }
         }
         return flag ? descendant.toString() : null;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(isPalindromeDescendant(11));
     }
 }
