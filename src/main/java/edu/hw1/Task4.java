@@ -1,14 +1,15 @@
 package edu.hw1;
 
 public class Task4 {
+    public Task4() {}
     public static String fixString(String str) {
-        char[] old_str = str.toCharArray();
+        char[] oldStr = str.toCharArray();
         char temp = '\0';
-        for (int i = 0; i < old_str.length - 1; i += 2) {
-            temp = old_str[i];
-            old_str[i] = old_str[i + 1];
-            old_str[i + 1] = temp;
+        for (int i = 0; i < oldStr.length - 1; i += 2) {
+            temp = oldStr[i];
+            oldStr[i] = oldStr[i + 1];
+            oldStr[i + 1] = temp;
         }
-        return new String(old_str);
+        return new String(oldStr);
     }
 }

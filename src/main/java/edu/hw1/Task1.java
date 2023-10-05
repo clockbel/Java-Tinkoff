@@ -8,7 +8,8 @@ public class Task1 {
             String[] pairs = timeMinutes.split(":");
             if (pairs.length == 2) {
                 try {
-                    int minutes = Integer.parseInt(pairs[0]) * 60;
+                    final int secondsSixty = 60;
+                    int minutes = Integer.parseInt(pairs[0]) * secondsSixty;
                     int seconds = Integer.parseInt(pairs[1]);
                     if (minutes >= 0 && seconds >= 0 && seconds < 60) {
                         timeSeconds = minutes + seconds;
