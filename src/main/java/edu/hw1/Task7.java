@@ -12,8 +12,11 @@ public final class Task7 {
         }
         int numBits = (Integer.toBinaryString(newNumber)).length();
         shiftCount %= numBits;
-        int res = (newNumber << shift) | (newNumber >> (numBits - shiftCount));
-        int rankRes = (int) Math.pow(2, numBits) - 1;
+        int res = (newNumber << shiftCount) | (newNumber >> (numBits - shiftCount));
+        int rankRes = (int) Math.pow(2, numBits);
+        if (number != Integer.MAX_VALUE) {
+            rankRes -= 1;
+        }
         return res & rankRes;
     }
 
@@ -26,8 +29,10 @@ public final class Task7 {
         int numBits = (Integer.toBinaryString(newNumber)).length();
         shiftCount %= numBits;
         int res = (newNumber >> shiftCount) | (newNumber << (numBits - shiftCount));
-        int rankRes = (int) Math.pow(2, numBits) - 1;
+        int rankRes = (int) Math.pow(2, numBits);
+        if (number != Integer.MAX_VALUE) {
+            rankRes -= 1;
+        }
         return res & rankRes;
     }
-
 }

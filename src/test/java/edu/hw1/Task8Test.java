@@ -19,7 +19,7 @@ public class Task8Test {
             {0, 0, 0, 0, 1, 0, 0, 0}
         };
         boolean a = Task8.knightBoardCapture(board);
-        assertThat(a).isEqualTo(true);
+        assertThat(a).isTrue();
     }
 
     @Test
@@ -36,7 +36,7 @@ public class Task8Test {
             {0, 0, 0, 1, 0, 1, 0, 1}
         };
         boolean a = Task8.knightBoardCapture(board);
-        assertThat(a).isEqualTo(false);
+        assertThat(a).isFalse();
     }
 
     @Test
@@ -53,7 +53,7 @@ public class Task8Test {
             {1, 0, 0, 0, 0, 0, 0, 0}
         };
         boolean a = Task8.knightBoardCapture(board);
-        assertThat(a).isEqualTo(false);
+        assertThat(a).isFalse();
     }
 
     @Test
@@ -70,6 +70,6 @@ public class Task8Test {
             {0, 0, 0, 0, 0, 0, 0, 0}
         };
         boolean a = Task8.knightBoardCapture(board);
-        assertThat(a).isEqualTo(true);
+        assertThat(a).isTrue();
     }
 }

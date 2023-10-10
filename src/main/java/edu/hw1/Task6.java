@@ -6,10 +6,11 @@ public final class Task6 {
     private Task6() {
     }
 
+    private static final int KAPREKAR_CONST = 6174;
+
     public static int countK(int number) {
-        final int finalNumber = 6174;
         int count = 1;
-        if (number == finalNumber) {
+        if (number == KAPREKAR_CONST) {
             count = 0;
         } else {
             int[] intArray = intergerToArray(number);

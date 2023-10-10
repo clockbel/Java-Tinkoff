@@ -11,7 +11,7 @@ public class Task3Test {
         int[] array1 = new int[] {1, 2, 3, 4};
         int[] array2 = new int[] {0, 6};
         boolean a = Task3.isNestable(array1, array2);
-        assertThat(a).isEqualTo(true);
+        assertThat(a).isTrue();
     }
 
     @Test
@@ -20,7 +20,7 @@ public class Task3Test {
         int[] array1 = new int[] {3, 1};
         int[] array2 = new int[] {4, 0};
         boolean a = Task3.isNestable(array1, array2);
-        assertThat(a).isEqualTo(true);
+        assertThat(a).isTrue();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class Task3Test {
         int[] array1 = new int[] {9, 9, 8};
         int[] array2 = new int[] {8, 9};
         boolean a = Task3.isNestable(array1, array2);
-        assertThat(a).isEqualTo(false);
+        assertThat(a).isFalse();
     }
 
     @Test
@@ -38,7 +38,7 @@ public class Task3Test {
         int[] array1 = new int[] {1, 2, 3, 4};
         int[] array2 = new int[] {2, 3};
         boolean a = Task3.isNestable(array1, array2);
-        assertThat(a).isEqualTo(false);
+        assertThat(a).isFalse();
     }
 
     @Test
@@ -47,7 +47,7 @@ public class Task3Test {
         int[] array1 = new int[]{};
         int[] array2 = new int[]{};
         boolean a = Task3.isNestable(array1, array2);
-        assertThat(a).isEqualTo(false);
+        assertThat(a).isFalse();
     }
 
     @Test
@@ -56,6 +56,6 @@ public class Task3Test {
         int[] array1 = new int[1];
         int[] array2 = new int[3];
         boolean a = Task3.isNestable(array1, array2);
-        assertThat(a).isEqualTo(false);
+        assertThat(a).isFalse();
     }
 }
