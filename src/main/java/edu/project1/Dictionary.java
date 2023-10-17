@@ -1,9 +1,9 @@
 package edu.project1;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,12 +16,23 @@ public class Dictionary {
 
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public Dictionary(String filePath) {
+    public InputStream getFileAsIOStream(final String fileName) {
+        InputStream ioStream = this.getClass()
+            .getClassLoader()
+            .getResourceAsStream(fileName);
+
+        if (ioStream == null) {
+            throw new IllegalArgumentException(fileName + " is not found");
+        }
+        return ioStream;
+    }
+
+    public void readFile(InputStream is) {
         words = new ArrayList<>();
-        File f = new File(filePath);
-        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+        try (InputStreamReader isr = new InputStreamReader(is);
+             BufferedReader br = new BufferedReader(isr);) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 words.add(line);
             }
         } catch (IOException e) {
