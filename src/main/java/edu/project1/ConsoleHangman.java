@@ -1,35 +1,49 @@
-//package edu.project1;
-//
-//import java.util.Arrays;
-//import java.util.Scanner;
-//
-//public class ConsoleHangman {
-//    public static void main(String[] args) {
-//        String Word = "hello";
-//        char[] WordGame = Word.toCharArray();
-//        char[] WordSectret = new char[WordGame.length];
-//        Arrays.fill(WordSectret, '*');
-//        System.out.println(WordGame);
-//        System.out.println(WordSectret);
-//        boolean flag = true;
-//        boolean check = false;
-//        char sym;
-//        Scanner in = new Scanner(System.in);
-//        while (flag) {
-//            check = false;
-//            sym = in.next().charAt(0);
-//            for (int i = 0; i < WordSectret.length; i++) {
-//                if (WordGame[i] == sym) {
-//                    WordSectret[i] = sym;
-//                    check = true;
-//                }
-//            }
-//            if (!check) {
-//                System.out.println("No char");
-//            } else {
-//                System.out.println("Have char");
-//            }
-//            System.out.println(WordSectret);
-//        }
-//    }
-//}
+package edu.project1;
+
+import java.util.Objects;
+
+public final class ConsoleHangman {
+    private static final char INCORRECT_CHAR = '$';
+    private static final int MAX_ATTEMPTS = 10;
+
+    private ConsoleHangman() {
+    }
+
+    public static void hangmanStart() {
+        String filePath = "src\\main\\java\\edu\\project1\\dictionaryFiles\\words.txt";
+        Dictionary dictionary = new Dictionary(filePath);
+        String word = dictionary.getRandomWord();
+        boolean flagWord = !Objects.equals(word, "Dictionary is empty") && !Objects.equals(word, "Incorrect word");
+        if (flagWord) {
+            boolean check;
+            char sym;
+            int checkAttempts = 0;
+            boolean flag = true;
+            Attempts kol = new Attempts(MAX_ATTEMPTS);
+            HiddenWord wordSecret = new HiddenWord(word);
+            try {
+                while (flag) {
+                    Messege.statusGame(Status.WORD, wordSecret.getHiddenWord());
+                    sym = Scan.scannerSymbol();
+                    if (sym != INCORRECT_CHAR) {
+                        check = wordSecret.replaceChar(sym);
+                        if (!check) {
+                            Messege.statusGame(Status.NOT_FOUND, "");
+                            flag = kol.checkAttemptLose(++checkAttempts);
+                        } else {
+                            Messege.statusGame(Status.FOUND, "");
+                            flag = kol.checkAttemptWin(wordSecret.getHiddenWord());
+                        }
+                    } else {
+                        Messege.statusGame(Status.INCORRECT_CHAR, "");
+                    }
+                }
+            } catch (Exception e) {
+                Messege.statusGame(Status.WORD, "Exit game");
+            }
+            Messege.statusGame(Status.WORD, "Game word:" + word);
+        } else {
+            Messege.statusGame(Status.WORD, "Dictionary fail: " + word);
+        }
+    }
+}
