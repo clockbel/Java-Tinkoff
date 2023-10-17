@@ -8,19 +8,19 @@ public class Project1Test {
     @Test
     @DisplayName("TestDictionaryIsEmpty")
     void TestDictionaryIsEmpty() {
-        Dictionary dictionary = new Dictionary("src\\test\\java\\edu\\project1\\dictionaryTestFiles\\emptyfile.txt");
+        Dictionary dictionary = new Dictionary("src\\main\\resources\\dictionaryTestFiles\\emptyfile.txt");
        assertThat(dictionary.getRandomWord()).isEqualTo("Dictionary is empty");
     }
     @Test
     @DisplayName("TestIncorrectWord")
     void TestIncorrectWord() {
-        Dictionary dictionary = new Dictionary("src\\test\\java\\edu\\project1\\dictionaryTestFiles\\incorrectWord.txt");
+        Dictionary dictionary = new Dictionary("src\\main\\resources\\dictionaryTestFiles\\incorrectWord.txt");
         assertThat(dictionary.getRandomWord()).isEqualTo("Incorrect word");
     }
     @Test
     @DisplayName("TestCorrectWord")
     void TestCorrectWord() {
-        Dictionary dictionary = new Dictionary("src\\test\\java\\edu\\project1\\dictionaryTestFiles\\correctWord.txt");
+        Dictionary dictionary = new Dictionary("src\\main\\resources\\dictionaryTestFiles\\correctWord.txt");
         assertThat(dictionary.getRandomWord()).isEqualTo("correct");
     }
 

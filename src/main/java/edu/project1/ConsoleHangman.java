@@ -10,7 +10,7 @@ public final class ConsoleHangman {
     }
 
     public static void hangmanStart() {
-        String filePath = "src\\main\\java\\edu\\project1\\dictionaryFiles\\words.txt";
+        String filePath = "src\\main\\java\\edu\\resources\\dictionaryFiles\\words.txt";
         Dictionary dictionary = new Dictionary(filePath);
         String word = dictionary.getRandomWord();
         boolean flagWord = !Objects.equals(word, "Dictionary is empty") && !Objects.equals(word, "Incorrect word");
