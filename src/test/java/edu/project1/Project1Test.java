@@ -8,7 +8,7 @@ public class Project1Test {
     @Test
     @DisplayName("TestDictionaryIsEmpty")
     void TestDictionaryIsEmpty() {
-        String filePath = "dictionaryTestFiles\\emptyfile.txt";
+        String filePath = "dictionaryTestFiles/emptyfile.txt";
         Dictionary dictionary = new Dictionary();
         dictionary.readFile(dictionary.getFileAsIOStream(filePath));
        assertThat(dictionary.getRandomWord()).isEqualTo("Dictionary is empty");
@@ -16,7 +16,7 @@ public class Project1Test {
     @Test
     @DisplayName("TestIncorrectWord")
     void TestIncorrectWord() {
-        String filePath = "dictionaryTestFiles\\incorrectWord.txt";
+        String filePath = "dictionaryTestFiles/incorrectWord.txt";
         Dictionary dictionary = new Dictionary();
         dictionary.readFile(dictionary.getFileAsIOStream(filePath));
         assertThat(dictionary.getRandomWord()).isEqualTo("Incorrect word");
@@ -24,7 +24,7 @@ public class Project1Test {
     @Test
     @DisplayName("TestCorrectWord")
     void TestCorrectWord() {
-        String filePath = "dictionaryTestFiles\\correctWord.txt";
+        String filePath = "dictionaryTestFiles/correctWord.txt";
         Dictionary dictionary = new Dictionary();
         dictionary.readFile(dictionary.getFileAsIOStream(filePath));
         assertThat(dictionary.getRandomWord()).isEqualTo("correct");

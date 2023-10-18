@@ -10,7 +10,7 @@ public final class ConsoleHangman {
     }
 
     public static void hangmanStart() {
-        String filePath = "dictionaryFiles\\words.txt";
+        String filePath = "dictionaryFiles/words.txt";
         Dictionary dictionary = new Dictionary();
         dictionary.readFile(dictionary.getFileAsIOStream(filePath));
         String word = dictionary.getRandomWord();
