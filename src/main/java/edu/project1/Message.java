@@ -3,15 +3,15 @@ package edu.project1;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public final class Messege {
-    private Messege() {
+public final class Message {
+    private Message() {
 
     }
 
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public static void statusGame(Status choice, String word) {
-        switch (choice) {
+    public static void statusGame(Status status, String word) {
+        switch (status) {
             case WIN:
                 LOGGER.info("You win!");
                 break;

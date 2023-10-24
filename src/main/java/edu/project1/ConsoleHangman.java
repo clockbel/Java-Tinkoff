@@ -20,31 +20,33 @@ public final class ConsoleHangman {
             char sym;
             int checkAttempts = 0;
             boolean flag = true;
+            Status status;
             Attempts kol = new Attempts(MAX_ATTEMPTS);
             HiddenWord wordSecret = new HiddenWord(word);
             try {
                 while (flag) {
-                    Messege.statusGame(Status.WORD, wordSecret.getHiddenWord());
+                    Message.statusGame(Status.WORD, wordSecret.getHiddenWord());
                     sym = Scan.scannerSymbol();
                     if (sym != INCORRECT_CHAR) {
                         check = wordSecret.replaceChar(sym);
                         if (!check) {
-                            Messege.statusGame(Status.NOT_FOUND, "");
+                            status = Status.NOT_FOUND;
                             flag = kol.checkAttemptLose(++checkAttempts);
                         } else {
-                            Messege.statusGame(Status.FOUND, "");
+                            status = Status.FOUND;
                             flag = kol.checkAttemptWin(wordSecret.getHiddenWord());
                         }
                     } else {
-                        Messege.statusGame(Status.INCORRECT_CHAR, "");
+                        status = Status.INCORRECT_CHAR;
                     }
+                    Message.statusGame(status, "");
                 }
             } catch (Exception e) {
-                Messege.statusGame(Status.WORD, "Exit game");
+                Message.statusGame(Status.WORD, "Exit game");
             }
-            Messege.statusGame(Status.WORD, "Game word:" + word);
+            Message.statusGame(Status.WORD, "Game word:" + word);
         } else {
-            Messege.statusGame(Status.WORD, "Dictionary fail: " + word);
+            Message.statusGame(Status.WORD, "Dictionary fail: " + word);
         }
     }
 }

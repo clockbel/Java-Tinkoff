@@ -12,7 +12,9 @@ import org.apache.logging.log4j.Logger;
 
 public class Dictionary {
     private List<String> words;
-    private static final int MAX_LENGHT_WORD = 3;
+    private static final int MAX_LENGTH_WORD = 3;
+    private static final String DICTIONARY_IS_EMPTY = "Dictionary is empty";
+    private static final String INCORRECT_WORD = "Incorrect word";
 
     private final static Logger LOGGER = LogManager.getLogger();
 
@@ -46,13 +48,13 @@ public class Dictionary {
             Random random = new Random();
             int randomIndex = random.nextInt(words.size());
             String wordCheck = words.get(randomIndex);
-            if (wordCheck.length() < MAX_LENGHT_WORD || !checkWord(wordCheck)) {
-                word = "Incorrect word";
+            if (wordCheck.length() < MAX_LENGTH_WORD || !checkWord(wordCheck)) {
+                word = INCORRECT_WORD;
             } else {
                 word = wordCheck;
             }
         } else {
-            word = "Dictionary is empty";
+            word = DICTIONARY_IS_EMPTY;
         }
         return word;
     }

@@ -12,10 +12,10 @@ public class Attempts {
     }
 
     public boolean checkAttemptLose(int attempt) {
-        LOGGER.info("Attempt to check " + Integer.toString(attempt) + " from " + Integer.toString(countAttemptsLose));
+        LOGGER.info("Attempt to check " + attempt + " from " + countAttemptsLose);
         boolean flag = true;
         if (attempt == countAttemptsLose) {
-            Messege.statusGame(Status.LOSE, "");
+            Message.statusGame(Status.LOSE, "");
             flag = false;
         }
         return flag;
@@ -24,7 +24,7 @@ public class Attempts {
     public boolean checkAttemptWin(String wordGame) {
         boolean flag = true;
         if (wordGame.indexOf('*') == -1) {
-            Messege.statusGame(Status.WIN, "");
+            Message.statusGame(Status.WIN, "");
             flag = false;
         }
         return flag;
