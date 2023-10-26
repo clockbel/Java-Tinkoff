@@ -1,14 +1,18 @@
-package edu.hw3;
+package edu.hw3.Task2;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Task2 {
-    private Task2() {
+public final class ClasterBrackets {
+    private ClasterBrackets() {
 
     }
 
     public static List<String> clusterize(String input) {
+        boolean flag = checkInput(input);
+        if (!flag) {
+            return new ArrayList<>();
+        }
         List<String> clusters = new ArrayList<>();
         int balance = 0;
         StringBuilder currentCluster = new StringBuilder();
@@ -25,5 +29,20 @@ public final class Task2 {
             }
         }
         return clusters;
+    }
+
+    private static boolean checkInput(String input) {
+        int countBrackets = 0;
+        for (char symbol: input.toCharArray()) {
+            if (symbol != '(' &&  symbol != ')') {
+                return false;
+            }
+            if (symbol == '(') {
+                countBrackets += 1;
+            } else {
+                countBrackets -= 1;
+            }
+        }
+        return true;
     }
 }

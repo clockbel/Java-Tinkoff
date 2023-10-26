@@ -1,13 +1,15 @@
-package edu.hw3;
+package edu.hw3.Task4;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import org.jetbrains.annotations.NotNull;
 
-public final class Task4 {
-    private Task4() {
+public final class RomanOperation {
+    private RomanOperation() {
 
     }
 
@@ -26,20 +28,10 @@ public final class Task4 {
     private final static int ROMAN_VALUE_I = 1;
 
     public static String converToRoman(int num) {
-        HashMap<Integer, String> roman = new HashMap<>();
-        roman.put(ROMAN_VALUE_M, "M");
-        roman.put(ROMAN_VALUE_CM, "CM");
-        roman.put(ROMAN_VALUE_D, "D");
-        roman.put(ROMAN_VALUE_CD, "CD");
-        roman.put(ROMAN_VALUE_C, "C");
-        roman.put(ROMAN_VALUE_XC, "XC");
-        roman.put(ROMAN_VALUE_L, "L");
-        roman.put(ROMAN_VALUE_XL, "XL");
-        roman.put(ROMAN_VALUE_X, "X");
-        roman.put(ROMAN_VALUE_IX, "IX");
-        roman.put(ROMAN_VALUE_V, "V");
-        roman.put(ROMAN_VALUE_IV, "IV");
-        roman.put(ROMAN_VALUE_I, "I");
+        if (num <= 0) {
+            return null;
+        }
+        HashMap<Integer, String> roman = getIntegerStringHashMap();
 
         StringBuilder romanString = new StringBuilder();
         Set<Integer> romanKeys = roman.keySet();
@@ -55,5 +47,23 @@ public final class Task4 {
             }
         }
         return romanString.toString();
+    }
+
+    @NotNull private static HashMap<Integer, String> getIntegerStringHashMap() {
+        HashMap<Integer, String> roman = new HashMap<>();
+        roman.put(ROMAN_VALUE_M, "M");
+        roman.put(ROMAN_VALUE_CM, "CM");
+        roman.put(ROMAN_VALUE_D, "D");
+        roman.put(ROMAN_VALUE_CD, "CD");
+        roman.put(ROMAN_VALUE_C, "C");
+        roman.put(ROMAN_VALUE_XC, "XC");
+        roman.put(ROMAN_VALUE_L, "L");
+        roman.put(ROMAN_VALUE_XL, "XL");
+        roman.put(ROMAN_VALUE_X, "X");
+        roman.put(ROMAN_VALUE_IX, "IX");
+        roman.put(ROMAN_VALUE_V, "V");
+        roman.put(ROMAN_VALUE_IV, "IV");
+        roman.put(ROMAN_VALUE_I, "I");
+        return roman;
     }
 }
