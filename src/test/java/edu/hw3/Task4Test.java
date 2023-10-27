@@ -29,7 +29,6 @@ public class Task4Test {
     @Test
     @DisplayName("Test4")
     public void Test4() {
-        String result = "XVI";
         assertThat(RomanOperation.converToRoman(-10)).isNull();
     }
 }

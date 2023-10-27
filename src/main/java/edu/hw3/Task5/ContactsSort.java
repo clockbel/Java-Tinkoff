@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ContactsSort {
+public final class ContactsSort {
+    private ContactsSort() {
+    }
+
     private static final String WHITE_SPACE = " ";
 
     public static List<Contact> parseContacts(List<String> contacts, String choice) {
@@ -31,7 +34,7 @@ public class ContactsSort {
         return sortedContacts;
     }
 
-    public static List<Contact> contactsList(List<String> contacts) {
+    private static List<Contact> contactsList(List<String> contacts) {
         List<Contact> contactList = new ArrayList<>();
         String[] personData;
         for (String person : contacts) {
@@ -44,15 +47,4 @@ public class ContactsSort {
         }
         return contactList;
     }
-
-//    public static void main(String[] args) {
-//        List<String> persons1 = List.of(new String[] {"John Locke", "Thomas Aquinas", "David Hume", "Rene Descartes"});
-//        LOGGER.info(parseContacts(persons1,"ASC"));
-//        List<String> persons2 = List.of(new String[] {"Paul Erdos", "Leonhard Euler", "Carl Gauss"});
-//        LOGGER.info(parseContacts(persons2,"DESC"));
-//        List<String> persons3 = List.of(new String[] {});
-//        LOGGER.info(parseContacts(persons3,"ASC"));
-//        List<String> persons4 = null;
-//        LOGGER.info(parseContacts(persons4,"ASC"));
-//    }
 }
