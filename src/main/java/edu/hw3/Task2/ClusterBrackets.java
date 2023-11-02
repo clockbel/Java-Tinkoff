@@ -3,8 +3,8 @@ package edu.hw3.Task2;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ClasterBrackets {
-    private ClasterBrackets() {
+public final class ClusterBrackets {
+    private ClusterBrackets() {
 
     }
 
