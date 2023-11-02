@@ -10,25 +10,25 @@ public class Task4Test {
     public void Test1() {
         int num = 2;
         String result = "II";
-        assertThat(RomanOperation.converToRoman(num)).isEqualTo(result);
+        assertThat(RomanOperation.convertToRoman(num)).isEqualTo(result);
     }
     @Test
     @DisplayName("Test2")
     public void Test2() {
         int num = 12;
         String result = "XII";
-        assertThat(RomanOperation.converToRoman(num)).isEqualTo(result);
+        assertThat(RomanOperation.convertToRoman(num)).isEqualTo(result);
     }
     @Test
     @DisplayName("Test3")
     public void Test3() {
         int num = 16;
         String result = "XVI";
-        assertThat(RomanOperation.converToRoman(num)).isEqualTo(result);
+        assertThat(RomanOperation.convertToRoman(num)).isEqualTo(result);
     }
     @Test
     @DisplayName("Test4")
     public void Test4() {
-        assertThat(RomanOperation.converToRoman(-10)).isNull();
+        assertThat(RomanOperation.convertToRoman(-10)).isNull();
     }
 }

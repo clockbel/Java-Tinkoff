@@ -23,7 +23,7 @@ public final class RomanOperation {
     private final static int ROMAN_VALUE_IV = 4;
     private final static int ROMAN_VALUE_I = 1;
 
-    public static String converToRoman(int num) {
+    public static String convertToRoman(int num) {
         if (num <= 0) {
             return null;
         }
