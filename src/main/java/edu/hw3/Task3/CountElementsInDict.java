@@ -17,11 +17,7 @@ public final class CountElementsInDict {
         Map<Object, Integer> hashMap = new HashMap<>();
 
         for (Object elem : list) {
-            if (hashMap.containsKey(elem)) {
-                hashMap.put(elem, hashMap.get(elem) + 1);
-            } else {
-                hashMap.put(elem, 1);
-            }
+            hashMap.put(elem, hashMap.getOrDefault(elem, 0) + 1);
         }
         return hashMap;
     }

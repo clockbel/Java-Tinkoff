@@ -1,11 +1,7 @@
 package edu.hw3.Task4;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 
 public final class RomanOperation {
@@ -31,26 +27,22 @@ public final class RomanOperation {
         if (num <= 0) {
             return null;
         }
-        HashMap<Integer, String> roman = getIntegerStringHashMap();
-
+        Map<Integer, String> roman = getIntegerStringHashMap();
         StringBuilder romanString = new StringBuilder();
-        Set<Integer> romanKeys = roman.keySet();
-        List<Integer> list = new ArrayList<>(romanKeys);
-        Collections.reverse(list);
-        int numToRoman = num;
-        while (numToRoman > 0) {
-            for (int keys : list) {
-                while (numToRoman >= keys) {
-                    romanString.append(roman.get(keys));
-                    numToRoman -= keys;
-                }
+        int number = num;
+        for (Map.Entry<Integer, String> entry : roman.entrySet()) {
+            int value = entry.getKey();
+            String numeral = entry.getValue();
+            while (number >= value) {
+                romanString.append(numeral);
+                number -= value;
             }
         }
         return romanString.toString();
     }
 
-    @NotNull private static HashMap<Integer, String> getIntegerStringHashMap() {
-        HashMap<Integer, String> roman = new HashMap<>();
+    @NotNull private static Map<Integer, String> getIntegerStringHashMap() {
+        Map<Integer, String> roman = new LinkedHashMap<>();
         roman.put(ROMAN_VALUE_M, "M");
         roman.put(ROMAN_VALUE_CM, "CM");
         roman.put(ROMAN_VALUE_D, "D");

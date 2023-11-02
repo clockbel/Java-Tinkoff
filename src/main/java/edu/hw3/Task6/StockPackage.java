@@ -1,6 +1,5 @@
 package edu.hw3.Task6;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class StockPackage implements StockMarket {
@@ -8,12 +7,7 @@ public class StockPackage implements StockMarket {
     private final PriorityQueue<Stock> stocks;
 
     public StockPackage() {
-        stocks = new PriorityQueue<>(new Comparator<Stock>() {
-            @Override
-            public int compare(Stock o1, Stock o2) {
-                return -Integer.compare(o1.getPrice(), o2.getPrice());
-            }
-        });
+        stocks = new PriorityQueue<>((o1, o2) -> -Integer.compare(o1.getPrice(), o2.getPrice()));
     }
 
     @Override
