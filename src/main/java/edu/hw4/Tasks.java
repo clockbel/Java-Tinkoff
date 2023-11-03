@@ -7,7 +7,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import static edu.hw4.ValidationError.validateAnimal;
+import static edu.hw4.ValidationError.setErrorsToString;
 
 public class Tasks {
     private final static Logger LOGGER = LogManager.getLogger();
@@ -106,33 +109,51 @@ public class Tasks {
             animals.stream().filter(animal -> animal.type() == Animal.Type.SPIDER).count();
     }
 
-//    public static Animal Task18HeavyFish(List<Animal> animals1, List<Animal> animals2, List<Animal>... other)  {
-//
-//    }
+    public static Animal Task18HeavyFish(List<List<Animal>> animals) {
+        return animals.stream().flatMap(List::stream).filter(animal -> animal.type() == Animal.Type.FISH)
+            .max(Comparator.comparing(Animal::weight)).orElse(null);
+    }
 
-//    public static void main(String[] args) {
-//        Animal first = new Animal("Marcis", Animal.Type.CAT, Animal.Sex.F, 4, 500, 2000, true);
-//        Animal second = new Animal("Lord Richard", Animal.Type.CAT, Animal.Sex.M, 2, 50, 4000, true);
-//        Animal third = new Animal("Tom Gun", Animal.Type.CAT, Animal.Sex.M, 3, 300, 1000, true);
-//        Animal fourth = new Animal("Tomas", Animal.Type.DOG, Animal.Sex.M, 1, 400, 100, true);
-//        List<Animal> zoo = new ArrayList<>();
-//        zoo.add(first);
-//        zoo.add(second);
-//        zoo.add(third);
-//        zoo.add(fourth);
-////        LOGGER.info(Task1SortedAnimals(zoo));
-////        LOGGER.info(Task2SortedAnimals(zoo, 2));
-////        LOGGER.info(Task3CountAnimals(zoo));
-////        LOGGER.info(Task4MaxLenghtAnimal(zoo));
-////        LOGGER.info(Task5CountMale(zoo));
-////        LOGGER.info(Task6HeavyAnimal(zoo));
-////        LOGGER.info(Task7OldestAnimal(zoo));
-////        LOGGER.info(Task8HeavyAnimalShort(zoo, 3));
-////        LOGGER.info(Task9CountPaws(zoo));
-////        LOGGER.info(Task10AgeNotEqualPaws(zoo));
-////        LOGGER.info(Task11BitesAnimals(zoo));
-////        LOGGER.info(Task12WeightMoreHeight(zoo));
-////        LOGGER.info(Task13NameMoreTwoWord(zoo));
+    public static Map<String, Set<ValidationError>> Task19MapValidationError(List<Animal> animals) {
+        return animals.stream().collect(Collectors.toMap(Animal::name, ValidationError::validateAnimal)).entrySet()
+            .stream().filter(state -> !state.getValue().isEmpty())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public static Map<String, String> Task20MapValidationError(List<Animal> animals) {
+        return animals.stream().collect(Collectors.toMap(
+            Animal::name,
+            animal -> setErrorsToString(validateAnimal(animal))
+        ));
+    }
+
+    public static void main(String[] args) {
+        Animal first = new Animal("Marcis", Animal.Type.CAT, Animal.Sex.F, 4, 500, 2000, true);
+        Animal second = new Animal("Lord Richard", Animal.Type.CAT, Animal.Sex.M, 2, 50, 4000, true);
+        Animal third = new Animal("Tom Gun", Animal.Type.CAT, Animal.Sex.M, 3, 300, 1000, true);
+        Animal fourth = new Animal("Tomas", Animal.Type.DOG, Animal.Sex.M, 1, 400, 100, true);
+        Animal fifth = new Animal("", null, null, -10, -10, -10, false);
+        List<Animal> zoo = new ArrayList<>();
+        zoo.add(first);
+        zoo.add(second);
+        zoo.add(third);
+        zoo.add(fourth);
+        zoo.add(fifth);
+//        LOGGER.info(Task1SortedAnimals(zoo));
+//        LOGGER.info(Task2SortedAnimals(zoo, 2));
+//        LOGGER.info(Task3CountAnimals(zoo));
+//        LOGGER.info(Task4MaxLenghtAnimal(zoo));
+//        LOGGER.info(Task5CountMale(zoo));
+//        LOGGER.info(Task6HeavyAnimal(zoo));
+//        LOGGER.info(Task7OldestAnimal(zoo));
+//        LOGGER.info(Task8HeavyAnimalShort(zoo, 3));
+//        LOGGER.info(Task9CountPaws(zoo));
+//        LOGGER.info(Task10AgeNotEqualPaws(zoo));
+//        LOGGER.info(Task11BitesAnimals(zoo));
+//        LOGGER.info(Task12WeightMoreHeight(zoo));
+//        LOGGER.info(Task13NameMoreTwoWord(zoo));
 //        LOGGER.info(Task14DogMoreHeightK(zoo, 300));
-//    }
+        LOGGER.info(Task19MapValidationError(zoo));
+        LOGGER.info(Task20MapValidationError(zoo));
+    }
 }
