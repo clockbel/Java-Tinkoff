@@ -25,7 +25,7 @@ public class Maze {
         this.totalSteps = (rows - 1) * (columns - 1) / 4;
     }
 
-    private void initMaze() {
+    public void initMaze() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 map[i][j] = 1;
@@ -90,50 +90,50 @@ public class Maze {
             step();
         }
         minerDirection.clear();
-        minerDirection.add(Direction.RIGHT);
-        minerDirection.add(Direction.LEFT);
-        minerDirection.add(Direction.DOWN);
-        minerDirection.add(Direction.TOP);
-        int randomValue;
-        for (int i = 0; i < 2; i++) {
-            randomValue = random.nextInt(0, minerDirection.size());
-            minerDirection.remove(randomValue);
-        }
-        for (int i = 0; i < 2; i++) {
-            Direction wall = minerDirection.get(i);
-            switch (wall) {
-                case LEFT:
-                    randomValue = random.nextInt(1, map.length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    map[randomValue][0] = 0;
-                    break;
-                case RIGHT:
-                    randomValue = random.nextInt(1, map.length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    map[randomValue][map[0].length - 1] = 0;
-                    break;
-                case TOP:
-                    randomValue = random.nextInt(1, map[0].length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    map[0][randomValue] = 0;
-                    break;
-                case DOWN:
-                    randomValue = random.nextInt(1, map[0].length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    map[map.length - 1][randomValue] = 0;
-                    break;
-                default:
-                    break;
-            }
-        }
+//        minerDirection.add(Direction.RIGHT);
+//        minerDirection.add(Direction.LEFT);
+//        minerDirection.add(Direction.DOWN);
+//        minerDirection.add(Direction.TOP);
+//        int randomValue;
+//        for (int i = 0; i < 2; i++) {
+//            randomValue = random.nextInt(0, minerDirection.size());
+//            minerDirection.remove(randomValue);
+//        }
+//        for (int i = 0; i < 2; i++) {
+//            Direction wall = minerDirection.get(i);
+//            switch (wall) {
+//                case LEFT:
+//                    randomValue = random.nextInt(1, map.length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    map[randomValue][0] = 0;
+//                    break;
+//                case RIGHT:
+//                    randomValue = random.nextInt(1, map.length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    map[randomValue][map[0].length - 1] = 0;
+//                    break;
+//                case TOP:
+//                    randomValue = random.nextInt(1, map[0].length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    map[0][randomValue] = 0;
+//                    break;
+//                case DOWN:
+//                    randomValue = random.nextInt(1, map[0].length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    map[map.length - 1][randomValue] = 0;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
     }
 
     public void printMaze() {
@@ -158,10 +158,16 @@ public class Maze {
 
     public static void main(String[] args) {
         int[][] mapMaze = new int[11][11];
-        Maze maze = new Maze(7, 7);
+        Maze maze = new Maze(9, 9);
         maze.initMaze();
         maze.build();
         mapMaze = maze.getMaze();
+        for (int i = 0; i < mapMaze.length; i++) {
+            for (int j = 0; j < mapMaze[0].length; j++) {
+                System.out.print(mapMaze[i][j] + " ");
+            }
+            System.out.println();
+        }
         maze.printMaze();
     }
 }

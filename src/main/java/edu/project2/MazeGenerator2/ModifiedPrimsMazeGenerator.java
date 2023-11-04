@@ -69,50 +69,50 @@ public class ModifiedPrimsMazeGenerator {
             }
         }
 
-        directions.add(edu.project2.MazeGenerator2.Direction2.RIGHT);
-        directions.add(edu.project2.MazeGenerator2.Direction2.LEFT);
-        directions.add(edu.project2.MazeGenerator2.Direction2.DOWN);
-        directions.add(edu.project2.MazeGenerator2.Direction2.TOP);
-        int randomValue;
-        for (int i = 0; i < 2; i++) {
-            randomValue = random.nextInt(0, directions.size());
-            directions.remove(randomValue);
-        }
-        for (int i = 0; i < 2; i++) {
-            Direction2 wall = directions.get(i);
-            switch (wall) {
-                case LEFT:
-                    randomValue = random.nextInt(1, maze.length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    maze[randomValue][0] = 0;
-                    break;
-                case RIGHT:
-                    randomValue = random.nextInt(1, maze.length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    maze[randomValue][maze[0].length - 1] = 0;
-                    break;
-                case TOP:
-                    randomValue = random.nextInt(1, maze[0].length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    maze[0][randomValue] = 0;
-                    break;
-                case DOWN:
-                    randomValue = random.nextInt(1, maze[0].length - 1);
-                    if (randomValue % 2 == 0) {
-                        randomValue++;
-                    }
-                    maze[maze.length - 1][randomValue] = 0;
-                    break;
-                default:
-                    break;
-            }
-        }
+//        directions.add(edu.project2.MazeGenerator2.Direction2.RIGHT);
+//        directions.add(edu.project2.MazeGenerator2.Direction2.LEFT);
+//        directions.add(edu.project2.MazeGenerator2.Direction2.DOWN);
+//        directions.add(edu.project2.MazeGenerator2.Direction2.TOP);
+//        int randomValue;
+//        for (int i = 0; i < 2; i++) {
+//            randomValue = random.nextInt(0, directions.size());
+//            directions.remove(randomValue);
+//        }
+//        for (int i = 0; i < 2; i++) {
+//            Direction2 wall = directions.get(i);
+//            switch (wall) {
+//                case LEFT:
+//                    randomValue = random.nextInt(1, maze.length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    maze[randomValue][0] = 0;
+//                    break;
+//                case RIGHT:
+//                    randomValue = random.nextInt(1, maze.length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    maze[randomValue][maze[0].length - 1] = 0;
+//                    break;
+//                case TOP:
+//                    randomValue = random.nextInt(1, maze[0].length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    maze[0][randomValue] = 0;
+//                    break;
+//                case DOWN:
+//                    randomValue = random.nextInt(1, maze[0].length - 1);
+//                    if (randomValue % 2 == 0) {
+//                        randomValue++;
+//                    }
+//                    maze[maze.length - 1][randomValue] = 0;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
         return maze;
     }
 
