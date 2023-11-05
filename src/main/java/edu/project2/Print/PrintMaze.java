@@ -1,7 +1,9 @@
 package edu.project2.Print;
 
+import edu.project2.Coordinate.Coordinate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import java.util.List;
 
 public class PrintMaze {
     private PrintMaze() {
@@ -10,29 +12,41 @@ public class PrintMaze {
 
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public static void printPath(int[][] maze) {
-//        int x;
-//        int y;
-//        for (Point point : path) {
-//            x = point.getX();
-//            y = point.getY();
-//            maze[x][y] = 2;
-//        }
+    public static void printMaze(int[][] maze) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\n");
-        for (int i = 0; i < 11; i++) {
-            for (int j = 0; j < 11; j++) {
-                if (maze[i][j] == 0) {
+        for (int[] ints : maze) {
+            for (int j = 0; j < maze[0].length; j++) {
+                if (ints[j] == 0) {
                     stringBuilder.append("  ");
-                } else if (maze[i][j] == 1) {
+                } else if (ints[j] == 1) {
                     stringBuilder.append("╭╴");
-//                } else {
-//                    stringBuilder.append(". ");
                 }
-//                stringBuilder.append(maze[i][j]);
             }
             stringBuilder.append("\n");
         }
         LOGGER.info(stringBuilder);
+    }
+
+    public static void printPath(int[][] maze, List<Coordinate> path) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\n");
+        for (Coordinate coordinate: path) {
+            maze[coordinate.x][coordinate.y] = 2;
+        }
+        for (int[] ints : maze) {
+            for (int j = 0; j < maze[0].length; j++) {
+                if (ints[j] == 0) {
+                    stringBuilder.append("  ");
+                } else if (ints[j] == 1) {
+                    stringBuilder.append("╭╴");
+                } else if (ints[j] == 2) {
+                    stringBuilder.append(". ");
+                }
+            }
+            stringBuilder.append("\n");
+        }
+        LOGGER.info(stringBuilder);
+
     }
 }

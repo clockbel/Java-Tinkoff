@@ -1,24 +1,25 @@
 package edu.project2.MazeGenerator;
 
+import edu.project2.Coordinate.Coordinate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Maze {
+public class Miner {
     private final int rows;
     private final int columns;
     private final int[][] map;
     private final int totalSteps;
     private int steps;
-    private final List<Slot> path = new ArrayList<>();
+    private final List<Coordinate> path = new ArrayList<>();
     private final List<Direction> minerDirection = new ArrayList<>();
 
     private final Random random = new Random();
     private final static Logger LOGGER = LogManager.getLogger();
 
-    public Maze(int rows, int columns) {
+    public Miner(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         this.map = new int[rows][columns];
@@ -33,13 +34,13 @@ public class Maze {
         }
         map[1][1] = 0;
         steps = 1;
-        path.add(new Slot(1, 1));
+        path.add(new Coordinate(1, 1));
     }
 
     public void step() {
         minerDirection.clear();
         ;
-        Slot last = path.get(path.size() - 1);
+        Coordinate last = path.get(path.size() - 1);
         if (last.x + 2 < map[0].length && map[last.y][last.x + 2] == 1) {
             minerDirection.add(Direction.RIGHT);
         }
@@ -60,22 +61,22 @@ public class Maze {
                 case RIGHT: //движение вправо
                     map[last.y][last.x + 1] = 0;
                     map[last.y][last.x + 2] = 0;
-                    path.add(new Slot(last.y, last.x + 2));
+                    path.add(new Coordinate(last.x + 2, last.y));
                     break;
                 case LEFT: //движение влево
                     map[last.y][last.x - 1] = 0;
                     map[last.y][last.x - 2] = 0;
-                    path.add(new Slot(last.y, last.x - 2));
+                    path.add(new Coordinate(last.x - 2, last.y));
                     break;
                 case DOWN: //движение вниз
                     map[last.y + 1][last.x] = 0;
                     map[last.y + 2][last.x] = 0;
-                    path.add(new Slot(last.y + 2, last.x));
+                    path.add(new Coordinate(last.x, last.y + 2));
                     break;
                 case TOP: //движение вверх
                     map[last.y - 1][last.x] = 0;
                     map[last.y - 2][last.x] = 0;
-                    path.add(new Slot(last.y - 2, last.x));
+                    path.add(new Coordinate(last.x, last.y - 2));
                     break;
                 default:
                     break;
@@ -90,50 +91,6 @@ public class Maze {
             step();
         }
         minerDirection.clear();
-//        minerDirection.add(Direction.RIGHT);
-//        minerDirection.add(Direction.LEFT);
-//        minerDirection.add(Direction.DOWN);
-//        minerDirection.add(Direction.TOP);
-//        int randomValue;
-//        for (int i = 0; i < 2; i++) {
-//            randomValue = random.nextInt(0, minerDirection.size());
-//            minerDirection.remove(randomValue);
-//        }
-//        for (int i = 0; i < 2; i++) {
-//            Direction wall = minerDirection.get(i);
-//            switch (wall) {
-//                case LEFT:
-//                    randomValue = random.nextInt(1, map.length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    map[randomValue][0] = 0;
-//                    break;
-//                case RIGHT:
-//                    randomValue = random.nextInt(1, map.length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    map[randomValue][map[0].length - 1] = 0;
-//                    break;
-//                case TOP:
-//                    randomValue = random.nextInt(1, map[0].length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    map[0][randomValue] = 0;
-//                    break;
-//                case DOWN:
-//                    randomValue = random.nextInt(1, map[0].length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    map[map.length - 1][randomValue] = 0;
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
     }
 
     public void printMaze() {
@@ -157,14 +114,14 @@ public class Maze {
     }
 
     public static void main(String[] args) {
-        int[][] mapMaze = new int[11][11];
-        Maze maze = new Maze(9, 9);
+        int[][] mapMaze;
+        Miner maze = new Miner(25, 25);
         maze.initMaze();
         maze.build();
         mapMaze = maze.getMaze();
-        for (int i = 0; i < mapMaze.length; i++) {
+        for (int[] ints : mapMaze) {
             for (int j = 0; j < mapMaze[0].length; j++) {
-                System.out.print(mapMaze[i][j] + " ");
+                System.out.print(ints[j] + " ");
             }
             System.out.println();
         }

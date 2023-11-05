@@ -1,18 +1,17 @@
-package edu.project2.MazeGenerator2;
+package edu.project2.MazeGenerator;
 
 import edu.project2.Print.PrintMaze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ModifiedPrimsMazeGenerator {
+public class Prim {
     private int width;
     private int height;
     private int[][] maze;
     private Random random = new Random();
-    private List<Direction2> directions = new ArrayList<>();
 
-    public ModifiedPrimsMazeGenerator(int width, int height) {
+    public Prim(int width, int height) {
         this.width = width;
         this.height = height;
         maze = new int[width][height];
@@ -68,56 +67,11 @@ public class ModifiedPrimsMazeGenerator {
                 }
             }
         }
-
-//        directions.add(edu.project2.MazeGenerator2.Direction2.RIGHT);
-//        directions.add(edu.project2.MazeGenerator2.Direction2.LEFT);
-//        directions.add(edu.project2.MazeGenerator2.Direction2.DOWN);
-//        directions.add(edu.project2.MazeGenerator2.Direction2.TOP);
-//        int randomValue;
-//        for (int i = 0; i < 2; i++) {
-//            randomValue = random.nextInt(0, directions.size());
-//            directions.remove(randomValue);
-//        }
-//        for (int i = 0; i < 2; i++) {
-//            Direction2 wall = directions.get(i);
-//            switch (wall) {
-//                case LEFT:
-//                    randomValue = random.nextInt(1, maze.length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    maze[randomValue][0] = 0;
-//                    break;
-//                case RIGHT:
-//                    randomValue = random.nextInt(1, maze.length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    maze[randomValue][maze[0].length - 1] = 0;
-//                    break;
-//                case TOP:
-//                    randomValue = random.nextInt(1, maze[0].length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    maze[0][randomValue] = 0;
-//                    break;
-//                case DOWN:
-//                    randomValue = random.nextInt(1, maze[0].length - 1);
-//                    if (randomValue % 2 == 0) {
-//                        randomValue++;
-//                    }
-//                    maze[maze.length - 1][randomValue] = 0;
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
         return maze;
     }
 
     public static void main(String[] args) {
-        ModifiedPrimsMazeGenerator mazeGenerator = new ModifiedPrimsMazeGenerator(11, 11);
+        Prim mazeGenerator = new Prim(11, 11);
         int[][] maze = mazeGenerator.generateMaze();
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 11; j++) {
@@ -125,6 +79,6 @@ public class ModifiedPrimsMazeGenerator {
             }
             System.out.println();
         }
-        PrintMaze.printPath(maze);
+        PrintMaze.printMaze(maze);
     }
 }

@@ -1,17 +1,10 @@
-package edu.project2.MazeSolver2;
+package edu.project2.MazeSolver;
 
+import edu.project2.Coordinate.Coordinate;
 import java.util.*;
 
-class Coordinate {
-    int x, y;
 
-    public Coordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
-public class MazeSolver {
+public class SolverDFS {
     private static final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     public static List<Coordinate> findPath(int[][] maze, Coordinate start, Coordinate end) {
@@ -53,21 +46,19 @@ public class MazeSolver {
 
     public static void main(String[] args) {
         int[][] maze = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1},
-            {1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1},
-            {1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1},
-            {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1},
-            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
-            {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1},
-            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+            {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 1, 0, 1, 0, 0, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 1},
+            {1, 0, 1, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1},
         };
 
         Coordinate start = new Coordinate(1, 1);
-        Coordinate end = new Coordinate(9, 5);
+        Coordinate end = new Coordinate(7, 7);
 
         List<Coordinate> path = findPath(maze, start, end);
 
