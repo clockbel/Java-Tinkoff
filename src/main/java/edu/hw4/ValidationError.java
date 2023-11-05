@@ -1,10 +1,11 @@
 package edu.hw4;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ValidationError extends RuntimeException {
-    final IncorrectState incorrectState;
+    private final IncorrectState incorrectState;
     private final String incorrectMessage;
 
     public enum IncorrectState {
@@ -21,8 +22,16 @@ public class ValidationError extends RuntimeException {
         this.incorrectMessage = massage;
     }
 
+    public IncorrectState getIncorrectState() {
+        return incorrectState;
+    }
+
+    public String getIncorrectMessage() {
+        return incorrectMessage;
+    }
+
     public static Set<ValidationError> validateAnimal(Animal animal) {
-        Set<ValidationError> errorSet = new HashSet<>();
+        Set<ValidationError> errorSet = new LinkedHashSet<>();
         errorSet.addAll(errorName(animal));
         errorSet.addAll(errorType(animal));
         errorSet.addAll(errorSex(animal));
@@ -35,7 +44,7 @@ public class ValidationError extends RuntimeException {
     @SuppressWarnings("MagicNumber")
     private
     static Set<ValidationError> errorName(Animal animal) {
-        Set<ValidationError> errorSet = new HashSet<>();
+        Set<ValidationError> errorSet = new LinkedHashSet<>();
         if (animal.name() == null || animal.name().isEmpty()) {
             errorSet.add(new ValidationError(IncorrectState.NAME, "Name is empty or equal null"));
         } else if (animal.name().length() < 3) {
@@ -94,7 +103,7 @@ public class ValidationError extends RuntimeException {
     public static String setErrorsToString(Set<ValidationError> set) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Errors:");
-        for (ValidationError i: set) {
+        for (ValidationError i : set) {
             stringBuilder.append(i.incorrectMessage).append("; ");
         }
 //        if ) {
