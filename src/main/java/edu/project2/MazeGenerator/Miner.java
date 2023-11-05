@@ -1,8 +1,6 @@
 package edu.project2.MazeGenerator;
 
 import edu.project2.Coordinate.Coordinate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,8 +15,8 @@ public class Miner {
     private final List<Direction> minerDirection = new ArrayList<>();
 
     private final Random random = new Random();
-    private final static Logger LOGGER = LogManager.getLogger();
 
+    @SuppressWarnings("MagicNumber")
     public Miner(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
@@ -26,7 +24,7 @@ public class Miner {
         this.totalSteps = (rows - 1) * (columns - 1) / 4;
     }
 
-    public void initMaze() {
+    private void initMaze() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 map[i][j] = 1;
@@ -37,9 +35,8 @@ public class Miner {
         path.add(new Coordinate(1, 1));
     }
 
-    public void step() {
+    private void step() {
         minerDirection.clear();
-        ;
         Coordinate last = path.get(path.size() - 1);
         if (last.x + 2 < map[0].length && map[last.y][last.x + 2] == 1) {
             minerDirection.add(Direction.RIGHT);
@@ -86,46 +83,28 @@ public class Miner {
         }
     }
 
-    public void build() {
+    private void build() {
         while (steps < totalSteps) {
             step();
         }
         minerDirection.clear();
     }
 
-    public void printMaze() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\n");
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                if (map[i][j] == 0) {
-                    stringBuilder.append("  ");
-                } else {
-                    stringBuilder.append("╭╴");
-                }
-            }
-            stringBuilder.append("\n");
+    public int[][] generateMaze() {
+        if (validInput(map, rows, columns)) {
+            return null;
         }
-        LOGGER.info(stringBuilder);
-    }
-
-    public int[][] getMaze() {
+        initMaze();
+        build();
         return map;
     }
 
-    public static void main(String[] args) {
-        int[][] mapMaze;
-        Miner maze = new Miner(25, 25);
-        maze.initMaze();
-        maze.build();
-        mapMaze = maze.getMaze();
-        for (int[] ints : mapMaze) {
-            for (int j = 0; j < mapMaze[0].length; j++) {
-                System.out.print(ints[j] + " ");
-            }
-            System.out.println();
+    @SuppressWarnings("MagicNumber")
+    private boolean validInput(int[][] maze, int rows, int columns) {
+        if (maze == null || rows < 5 || columns < 5) {
+            return true;
         }
-        maze.printMaze();
+        return false;
     }
 }
 

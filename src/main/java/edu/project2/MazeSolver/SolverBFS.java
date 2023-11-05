@@ -1,13 +1,24 @@
 package edu.project2.MazeSolver;
 
 import edu.project2.Coordinate.Coordinate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
+public final class SolverBFS {
+    private SolverBFS() {
+    }
 
-public class SolverBFS {
     private static final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
 
     public static List<Coordinate> findPath(int[][] maze, Coordinate start, Coordinate end) {
+        if (validInput(maze, start, end)) {
+            return new ArrayList<>();
+        }
         int numRows = maze.length;
         int numCols = maze[0].length;
         boolean[][] visited = new boolean[numRows][numCols];
@@ -47,7 +58,24 @@ public class SolverBFS {
         return x >= 0 && x < numRows && y >= 0 && y < numCols && maze[x][y] == 0 && !visited[x][y];
     }
 
-    private static List<Coordinate> constructPath(Map<Coordinate, Coordinate> parentMap, Coordinate start, Coordinate end) {
+    private static boolean validInput(int[][] maze, Coordinate start, Coordinate exit) {
+        boolean flag = false;
+        if (maze == null) {
+            flag = true;
+        } else if (start.x <= 0 || start.y <= 0 || exit.x <= 0 || exit.y <= 0) {
+            flag = true;
+        } else if (start.x >= maze.length || start.y >= maze[0].length || exit.x >= maze.length
+            || exit.y >= maze[0].length) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    private static List<Coordinate> constructPath(
+        Map<Coordinate, Coordinate> parentMap,
+        Coordinate start,
+        Coordinate end
+    ) {
         List<Coordinate> path = new ArrayList<>();
         Coordinate current = end;
 
@@ -59,33 +87,5 @@ public class SolverBFS {
         path.add(start);
         Collections.reverse(path);
         return path;
-    }
-
-    public static void main(String[] args) {
-        int[][] maze = {
-            {1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 1, 0, 1, 0, 0, 0, 1},
-            {1, 0, 1, 0, 1, 0, 1, 0, 1},
-            {1, 0, 1, 0, 1, 0, 1, 0, 1},
-            {1, 0, 1, 1, 1, 1, 1, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        };
-
-        Coordinate start = new Coordinate(1, 1);
-        Coordinate end = new Coordinate(5, 1);
-
-        List<Coordinate> path = findPath(maze, start, end);
-
-        if (path.isEmpty()) {
-            System.out.println("No path found.");
-        } else {
-            System.out.println("Path found:");
-            for (Coordinate coordinate : path) {
-                System.out.println("(" + coordinate.y + ", " + coordinate.x + ")");
-            }
-        }
     }
 }
