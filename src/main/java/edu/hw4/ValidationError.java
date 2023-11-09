@@ -106,30 +106,6 @@ public class ValidationError extends RuntimeException {
         for (ValidationError i : set) {
             stringBuilder.append(i.incorrectMessage).append("; ");
         }
-//        if ) {
-//            stringBuilder.append(" NAME: Name is empty or equal null;");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.NAME, "Name is short"))) {
-//            stringBuilder.append(" NAME: Name is short;");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.NAME, "Name is long"))) {
-//            stringBuilder.append(" NAME: Name is long;");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.TYPE, "Type is null"))) {
-//            stringBuilder.append(" TYPE: Type is null");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.SEX, "Sex is null"))) {
-//            stringBuilder.append(" SEX: Sex is null");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.AGE, "Age < 0"))) {
-//            stringBuilder.append(" AGE: Age < 0");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.HEIGHT, "Height < 0"))) {
-//            stringBuilder.append(" HEIGHT: Height < 0");
-//        }
-//        if (set.contains(new ValidationError(IncorrectState.WEIGHT, "Weight < 0"))) {
-//            stringBuilder.append(" WEIGHT: Weight < 0");
-//        }
         return stringBuilder.toString();
     }
 }

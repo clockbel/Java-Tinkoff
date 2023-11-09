@@ -1,8 +1,5 @@
-package edu.project2;
+package edu.hw4;
 
-import edu.hw4.Animal;
-import edu.hw4.Tasks;
-import edu.hw4.ValidationError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

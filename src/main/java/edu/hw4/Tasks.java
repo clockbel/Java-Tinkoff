@@ -105,8 +105,8 @@ public final class Tasks {
     }
 
     public static Boolean task17DogSpider(List<Animal> animals) {
-        return animals.stream().filter(animal -> animal.type() == Animal.Type.SPIDER).count()
-            > animals.stream().filter(animal -> animal.type() == Animal.Type.DOG).count();
+        return animals.stream().filter(animal -> animal.type() == Animal.Type.SPIDER && animal.bites()).count()
+            > animals.stream().filter(animal -> animal.type() == Animal.Type.DOG && animal.bites()).count();
     }
 
     public static Animal task18HeavyFish(List<List<Animal>> animals) {
