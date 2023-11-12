@@ -7,6 +7,9 @@ public final class SubsequenceChecker {
     }
 
     public static boolean isSubsequence(String s, String t) {
+        if (s == null || t == null) {
+            return false;
+        }
         StringBuilder patternBuilder = new StringBuilder(".*");
         for (char c : s.toCharArray()) {
             patternBuilder.append(Pattern.quote(String.valueOf(c))).append(".*");

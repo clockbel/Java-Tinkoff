@@ -3,8 +3,12 @@ package edu.hw5.Task3;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public class CheckDate {
-    public Optional<LocalDate> parseDate(String date) {
+public final class CheckDate {
+    private CheckDate() {
+
+    }
+
+    public static Optional<LocalDate> parseDate(String date) {
         return ParseDateYearMonthDay.parseDate(date).isPresent()
             ? ParseDateYearMonthDay.parseDate(date)
             : ParseDateDayMonthYear.parseDate(date).isPresent()

@@ -7,6 +7,6 @@ public final class CarNumber {
     }
 
     public static boolean validateCarNumber(String password) {
-        return password.matches(PATTERN);
+        return password != null ? password.matches(PATTERN) : false;
     }
 }
