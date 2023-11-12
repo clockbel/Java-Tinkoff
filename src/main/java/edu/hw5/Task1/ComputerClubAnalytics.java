@@ -4,10 +4,13 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ComputerClubAnalytics {
+public final class ComputerClubAnalytics {
     private static final String DATETIME_PATTERN = "yyyy-MM-dd, HH:mm";
 
-    public static String Session(String[] sessionDates) {
+    private ComputerClubAnalytics() {
+    }
+
+    public static String session(String[] sessionDates) {
         Duration totalDuration = Duration.ZERO;
         if (sessionDates == null || sessionDates.length == 0) {
             return "0";
@@ -22,13 +25,7 @@ public class ComputerClubAnalytics {
             totalDuration = totalDuration.plus(tmp);
         }
         totalDuration = totalDuration.dividedBy(sessionDates.length);
-        return totalDuration.toHoursPart() + "ч " + totalDuration.toMinutesPart()+ "м";
-    }
-
-    public static void main(String[] args) {
-        String[] times =
-            new String[] {"2022-03-12, 20:20 - 2022-03-12, 23:50", "2022-04-01, 21:30 - 2022-04-02, 01:20"};
-        System.out.println(Session(times));
+        return totalDuration.toHoursPart() + "ч " + totalDuration.toMinutesPart() + "м";
     }
 }
 
