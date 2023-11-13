@@ -1,10 +1,10 @@
 package edu.hw5.Task8;
 
 public final class OneZeroAlphabet2 {
-    private static final String PATTERN_1 = "([01]{2})*[01]";
-    private static final String PATTERN_2 = "0([01]{2})*|1([01]{2})*[01]";
-    private static final String PATTERN_3 = "((1*01*){3})*";
-    private static final String PATTERN_4 = "(1[01])*[01]{0,1}";
+    private static final String PATTERN_1 = "^[01]([01]{2})*$";
+    private static final String PATTERN_2 = "^((0([01]{2})*)|(1([01]{2})*[01]))$";
+    private static final String PATTERN_3 = "^(1*01*01*01*)+$";
+    private static final String PATTERN_4 = "^(?!11$|111$)[01]*$";
 
     private OneZeroAlphabet2() {
 
