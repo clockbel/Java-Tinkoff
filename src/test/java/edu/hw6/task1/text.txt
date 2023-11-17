@@ -1,3 +1,0 @@
-123:hi
-hello:world
-10:rr
