@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 public final class PortScanner {
     private final static Logger LOGGER = LogManager.getLogger();
     private final static String HEADER = "Протокол  Порт   Используется  Сервис";
-    private final static int MAX_PORT = 28000;
+    private final static int MAX_PORT = 49151;
     private final static Map<Integer, String> KNOWN_PORTS = Map.of(
         135, "EPMAP",
         137, "Служба имен NetBIOS",
@@ -39,6 +39,7 @@ public final class PortScanner {
     }
 
     public static void scanTcpPorts() {
+        LOGGER.info(HEADER);
         for (int port = 0; port <= MAX_PORT; port++) {
             boolean isUsed = isTcpPortUsed(port);
             tracePort(Protocol.TCP, port, isUsed);
@@ -93,9 +94,5 @@ public final class PortScanner {
                 ));
             }
         }
-    }
-
-    public static void main(String[] args) {
-        scanTcpPorts();
     }
 }

@@ -1,7 +1,5 @@
 package edu.hw6.Task1;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -11,6 +9,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 public class DiskMap implements Map<String, String> {
 
@@ -102,17 +103,17 @@ public class DiskMap implements Map<String, String> {
     }
 
     @Override
-    public Set<String> keySet() {
+    public @NotNull Set<String> keySet() {
         return inMemoryMap.keySet();
     }
 
     @Override
-    public Collection<String> values() {
+    public @NotNull Collection<String> values() {
         return inMemoryMap.values();
     }
 
     @Override
-    public Set<Entry<String, String>> entrySet() {
+    public @NotNull Set<Entry<String, String>> entrySet() {
         return inMemoryMap.entrySet();
     }
 }

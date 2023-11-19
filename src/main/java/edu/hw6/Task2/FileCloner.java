@@ -1,12 +1,19 @@
 package edu.hw6.Task2;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class FileCloner {
+public final class FileCloner {
+    private FileCloner() {
+
+    }
+
+    private final static Logger LOGGER = LogManager.getLogger();
 
     public static void cloneFile(Path path) {
         String fileName = path.getFileName().toString();
@@ -31,15 +38,9 @@ public class FileCloner {
 
         try {
             Files.copy(path, destinationFile, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("File cloned successfully. New file: " + destinationFile);
+            LOGGER.info("File cloned successfully. New file: " + destinationFile);
         } catch (IOException e) {
-            System.err.println("Error cloning file: " + e.getMessage());
+            LOGGER.info("Error cloning file: " + e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        // Пример использования
-        Path sourcePath = Paths.get("./src/main/java/hw6/Task2/file.txt");
-        cloneFile(sourcePath);
     }
 }

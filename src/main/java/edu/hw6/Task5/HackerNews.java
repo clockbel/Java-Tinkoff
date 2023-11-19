@@ -4,14 +4,22 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-public class HackerNews {
+public final class HackerNews {
     private static final String TOP_STORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
     private static final String ITEM_URL_FORMAT = "https://hacker-news.firebaseio.com/v0/item/%d.json";
+    private final static Logger LOGGER = LogManager.getLogger();
+    private final static int GOOD_STATUS = 200;
 
+    private HackerNews() {
+
+    }
+
+    @SuppressWarnings("MagicNumber")
     public static long[] hackerNewsTopStories() {
         try {
             HttpClient client = HttpClient.newHttpClient();
@@ -21,7 +29,7 @@ public class HackerNews {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
+            if (response.statusCode() == GOOD_STATUS) {
                 String[] idStrings = response.body().replaceAll("[\\[\\]]", "").split(",");
                 long[] ids = new long[idStrings.length];
 
@@ -33,9 +41,8 @@ public class HackerNews {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("Incorrect http");
         }
-
         return new long[0];
     }
 
@@ -49,7 +56,7 @@ public class HackerNews {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == 200) {
+            if (response.statusCode() == GOOD_STATUS) {
                 String json = response.body();
                 Pattern pattern = Pattern.compile("\"title\":\"(.*?)\"");
                 Matcher matcher = pattern.matcher(json);
@@ -60,18 +67,9 @@ public class HackerNews {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.info("Incorrect work");
         }
 
         return "";
-    }
-
-    public static void main(String[] args) {
-        long[] topStories = hackerNewsTopStories();
-        System.out.println(Arrays.toString(topStories));
-
-        long newsId = 38251366;
-        String newsTitle = news(newsId);
-        System.out.println(newsTitle);
     }
 }
