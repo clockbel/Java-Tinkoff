@@ -13,9 +13,6 @@ public final class ArgumentsParser {
 
     public static ArgumentsContainer parse(String[] args) throws IOException {
         int argumentsCount = args.length;
-        if (argumentsCount < 1) {
-            throw new IllegalArgumentException("Not enough arguments");
-        }
         String path = null;
         LocalDate from = null;
         LocalDate to = null;

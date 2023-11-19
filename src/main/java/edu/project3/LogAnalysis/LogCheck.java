@@ -1,4 +1,4 @@
-package edu.project3.LogAnalys;
+package edu.project3.LogAnalysis;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

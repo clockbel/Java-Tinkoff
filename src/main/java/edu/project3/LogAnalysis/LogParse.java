@@ -1,4 +1,4 @@
-package edu.project3.LogAnalys;
+package edu.project3.LogAnalysis;
 
 import edu.project3.LogCorrector.DateCorrector;
 import java.time.LocalDate;

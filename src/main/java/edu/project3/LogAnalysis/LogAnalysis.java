@@ -1,4 +1,4 @@
-package edu.project3.LogAnalys;
+package edu.project3.LogAnalysis;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LogAnalys {
+public class LogAnalysis {
     private final List<Log> logs;
     private Map<String, Integer> resourceCountMap = new HashMap<>();
     private Map<String, Integer> responseCodeCountMap = new HashMap<>();
@@ -18,12 +18,15 @@ public class LogAnalys {
     private int totalRequests;
     private long averageResponseSize;
 
-    public LogAnalys(List<Log> logs) {
+    public LogAnalysis(List<Log> logs) {
         this.logs = logs;
         calculateMetrics();
     }
 
     public void calculateMetrics() {
+        if (logs.isEmpty()) {
+            throw new RuntimeException("List log is empty");
+        }
         totalRequests = logs.size();
         long totalResponseSize = 0;
         for (Log log : logs) {

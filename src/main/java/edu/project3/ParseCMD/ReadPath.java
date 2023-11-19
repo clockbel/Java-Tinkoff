@@ -31,7 +31,7 @@ public final class ReadPath {
                 Path filePath = Paths.get(path);
                 return new BufferedReader(new FileReader(filePath.toFile()));
             } catch (IOException e) {
-                throw new IOException(e);
+                throw new IOException("File is not founded");
             }
         }
     }
