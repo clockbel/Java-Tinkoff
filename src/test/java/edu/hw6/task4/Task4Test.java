@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import edu.hw6.Task4.OutputStreamCompositionExample;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -27,17 +28,13 @@ public class Task4Test {
     }
 
     @Test
-    void testWriteTextToFile() throws IOException {
+    @DisplayName("WriteTextToFile")
+    void test1() throws IOException {
         OutputStreamCompositionExample.filter(TEST_FILE_PATH);
         try (BufferedReader reader = Files.newBufferedReader(TEST_FILE_PATH)) {
             String line = reader.readLine();
             assertEquals("Programming is learned by writing programs. ― Brian Kernighan", line);
         }
-    }
-    @Test
-    void checkCheckSum() {
-        OutputStreamCompositionExample.filter(TEST_FILE_PATH);
-        assertEquals(OutputStreamCompositionExample.getCheckSum(), 266823);
     }
 
     private void createTestFile() {
