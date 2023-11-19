@@ -1,13 +1,16 @@
 package edu.project3.LogAnalys;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LogAnalys {
     private final List<Log> logs;
     private Map<String, Integer> resourceCountMap = new HashMap<>();
-    private Map<Integer, Integer> responseCodeCountMap = new HashMap<>();
+    private Map<String, Integer> responseCodeCountMap = new HashMap<>();
 
     private Map<String, Integer> ipAddressMap = new HashMap<>();
 
@@ -21,11 +24,8 @@ public class LogAnalys {
     }
 
     public void calculateMetrics() {
-        // Реализация расчета метрик
-        // Подсчет общего количества запросов
         totalRequests = logs.size();
         long totalResponseSize = 0;
-        // Определение наиболее часто запрашиваемых ресурсов
         for (Log log : logs) {
             String resource = log.resource();
             resourceCountMap.put(resource, resourceCountMap.getOrDefault(resource, 0) + 1);
@@ -35,10 +35,10 @@ public class LogAnalys {
 
             String userAgent = log.userAgent();
             userAgentMap.put(userAgent, userAgentMap.getOrDefault(userAgent, 0) + 1);
-            // Определение наиболее часто встречающихся кодов ответа
-            int responseCode = log.responseCode();
+
+            String responseCode = Integer.toString(log.responseCode());
             responseCodeCountMap.put(responseCode, responseCodeCountMap.getOrDefault(responseCode, 0) + 1);
-            // Рассчет среднего размера ответа сервера
+
             totalResponseSize += log.responseSize();
         }
         averageResponseSize = totalRequests > 0 ? totalResponseSize / totalRequests : 0;
@@ -49,7 +49,7 @@ public class LogAnalys {
         return resourceCountMap;
     }
 
-    public Map<Integer, Integer> getResponseCodeCountMap() {
+    public Map<String, Integer> getResponseCodeCountMap() {
         return responseCodeCountMap;
     }
 
@@ -67,5 +67,17 @@ public class LogAnalys {
 
     public Map<String, Integer> getUserAgentMap() {
         return userAgentMap;
+    }
+
+    public Map<String, Integer> sortedMap(Map<String, Integer> inputMap) {
+        return inputMap.entrySet()
+            .stream()
+            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+            .collect(Collectors.toMap(
+                Map.Entry::getKey,
+                Map.Entry::getValue,
+                (e1, e2) -> e1,
+                LinkedHashMap::new
+            ));
     }
 }

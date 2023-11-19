@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ArgumentsParser {
-
-
+public final class ArgumentsParser {
 
     private ArgumentsParser() {
     }
@@ -22,26 +20,30 @@ public class ArgumentsParser {
         LocalDate from = null;
         LocalDate to = null;
         OutputFormat format = null;
+        int plusI = 0;
         for (int i = 0; i < argumentsCount; i++) {
-            if (Objects.equals(args[i], "--path")) {
-                path = args[++i];
+            plusI = i;
+            if (Objects.equals(args[i], "--path") && i != argumentsCount - 1) {
+                path = args[++plusI];
             }
-            if (Objects.equals(args[i], "--from") || Objects.equals(args[i], "--to")) {
-                if (Objects.equals(args[i], "--from")) {
-                    from = ArgumentDate.parseDate(args[++i]);
-                } else {
-                    to = ArgumentDate.parseDate(args[++i]);
-                }
+            if (Objects.equals(args[i], "--from") && i != argumentsCount - 1) {
+                from = ArgumentDate.parseDate(args[++plusI]);
             }
-            if (Objects.equals(args[i], "--format")) {
-                format = ArgumentFormat.parseFormat(args[++i]);
+            if (Objects.equals(args[i], "--to") && i != argumentsCount - 1) {
+                to = ArgumentDate.parseDate(args[++plusI]);
+            }
+            if (Objects.equals(args[i], "--format") && i != argumentsCount - 1) {
+                format = ArgumentFormat.parseFormat(args[++plusI]);
             }
         }
-        return new ArgumentsContainer(
-            ReadPath.getBufferedReader(path),
+        return new
+            ArgumentsContainer(
+            ReadPath.getBufferedReader(path
+            ),
             from,
             to,
-            format
+            format,
+            path
         );
     }
 }

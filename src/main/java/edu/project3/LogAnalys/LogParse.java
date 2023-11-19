@@ -15,6 +15,7 @@ public class LogParse {
         this.to = to;
     }
 
+    @SuppressWarnings("MagicNumber")
     public Log parseLog() {
         Log log = null;
         Matcher matcher = LogCheck.checkLog(line);
@@ -30,6 +31,7 @@ public class LogParse {
         return log;
     }
 
+    @SuppressWarnings("MagicNumber")
     private Log process(Matcher matcher) {
         String ip = matcher.group(1);
         String resource = extractResource(matcher.group(6));

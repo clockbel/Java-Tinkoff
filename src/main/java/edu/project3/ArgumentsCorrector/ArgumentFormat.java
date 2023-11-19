@@ -1,10 +1,9 @@
 package edu.project3.ArgumentsCorrector;
 
 import edu.project3.ParseCMD.OutputFormat;
-
 import java.util.Objects;
 
-public class ArgumentFormat {
+public final class ArgumentFormat {
 
     private final static String MARKDOWN = "markdown";
     private final static String ADOC = "adoc";

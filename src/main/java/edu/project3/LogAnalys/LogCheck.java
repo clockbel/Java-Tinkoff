@@ -3,7 +3,7 @@ package edu.project3.LogAnalys;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class LogCheck {
+public final class LogCheck {
 
     private LogCheck() {
     }
