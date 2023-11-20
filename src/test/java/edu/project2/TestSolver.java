@@ -6,6 +6,7 @@ import edu.project2.MazeSolver.SolverDFS;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestSolver {
@@ -48,9 +49,14 @@ public class TestSolver {
             new Coordinate(9, 9)
         );
         boolean flag = true;
-        for (int i = 0; i < coordinateList.size() && flag; i++) {
-            if (coordinateList.get(i).x != result.get(i).x || coordinateList.get(i).y != result.get(i).y) {
-                flag = false;
+        if (coordinateList.isEmpty()) {
+            flag = false;
+        } else {
+            for (int i = 0; i < coordinateList.size(); i++) {
+                if (coordinateList.get(i).x != result.get(i).x || coordinateList.get(i).y != result.get(i).y) {
+                    flag = false;
+                    break;
+                }
             }
         }
         assertThat(flag).isTrue();
@@ -93,12 +99,62 @@ public class TestSolver {
             new Coordinate(9, 8),
             new Coordinate(9, 9)
         );
+
         boolean flag = true;
-        for (int i = 0; i < coordinateList.size() && flag; i++) {
-            if (coordinateList.get(i).x != result.get(i).x || coordinateList.get(i).y != result.get(i).y) {
-                flag = false;
+        if (coordinateList.isEmpty()) {
+            flag = false;
+        } else {
+            for (int i = 0; i < coordinateList.size(); i++) {
+                if (coordinateList.get(i).x != result.get(i).x || coordinateList.get(i).y != result.get(i).y) {
+                    flag = false;
+                    break;
+                }
             }
         }
         assertThat(flag).isTrue();
+    }
+    @Test
+    @DisplayName("TestSolver3")
+    public void Test3() {
+        int[][] maze = {
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(9, 9);
+        List<Coordinate> coordinateList = SolverBFS.findPath(maze, start, end);
+        List<Coordinate>  result = new ArrayList<>();
+        assertThat(coordinateList).isEqualTo(result);
+    }
+    @Test
+    @DisplayName("TestSolver4")
+    public void Test4() {
+        int[][] maze = {
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+            {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+            {1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+            {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1},
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1},
+            {1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+        };
+        Coordinate start = new Coordinate(1, 1);
+        Coordinate end = new Coordinate(9, 9);
+        List<Coordinate> coordinateList = SolverDFS.findPath(maze, start, end);
+        List<Coordinate> result = new ArrayList<>();
+        assertThat(coordinateList).isEqualTo(result);
     }
 }
