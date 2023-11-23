@@ -3,7 +3,6 @@ package edu.hw6.Task6;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
@@ -53,7 +52,7 @@ public final class PortScanner {
         return new PortsInfo(protocol.toString(), port, process);
     }
 
-    public static void PortsOutput() {
+    public static void portsOutput() {
         for (int i = 0; i < MAX_PORT; i++) {
             scanPorts(i);
         }
@@ -63,7 +62,7 @@ public final class PortScanner {
         }
     }
 
-    public static void main(String[] args) {
-        PortsOutput();
-    }
+//    public static void main(String[] args) {
+//        portsOutput();
+//    }
 }
