@@ -1,5 +1,6 @@
 package edu.hw6.Task3;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
@@ -33,8 +34,8 @@ public interface AbstractFilter extends DirectoryStream.Filter<Path> {
 
     static AbstractFilter magicNumber(int... magicBytes) {
         return entry -> {
-            try {
-                byte[] header = Files.readAllBytes(entry);
+            try (FileInputStream fileInputStream = new FileInputStream(entry.toFile())) {
+                byte[] header = fileInputStream.readNBytes(magicBytes.length);
                 if (header.length < magicBytes.length) {
                     return false;
                 }

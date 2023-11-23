@@ -2,6 +2,8 @@ package edu.hw6.task5;
 
 import edu.hw6.Task5.HackerNews;
 import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

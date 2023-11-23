@@ -1,8 +1,13 @@
 package edu.hw6.task1;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import edu.hw6.Task1.DiskMap;
 import org.junit.jupiter.api.AfterEach;
@@ -15,13 +20,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task1Test {
-
-    private static final String TEST_FILE_PATH = "src/test/java/edu/hw6/task1/files/test.txt";
     private DiskMap diskMap;
+    Path path = Path.of("src/test/resources/hw6/task1/test.txt");
 
     @BeforeEach
     void setUp() {
-        diskMap = new DiskMap(TEST_FILE_PATH);
+//        URL url = this.getClass().getResource("/src/test/resources/hw6/task1/test.txt");
+//        File file = new File(url.getFile());
+//        String path = file.getPath();
+//        InputStream stream = this.getClass().getResourceAsStream("hw6/task1/test.txt");
+//        Path path1;
+        diskMap = new DiskMap(path.toString());
     }
 
     @AfterEach
@@ -34,8 +43,8 @@ public class Task1Test {
     void test1() {
         diskMap.put("key1", "value1");
         diskMap.put("key2", "value2");
-
         assertEquals(2, diskMap.size());
+
     }
 
     @Test

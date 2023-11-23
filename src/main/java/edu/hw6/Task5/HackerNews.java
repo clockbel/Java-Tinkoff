@@ -1,5 +1,6 @@
 package edu.hw6.Task5;
 
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -13,7 +14,6 @@ public final class HackerNews {
     private static final String TOP_STORIES_URL = "https://hacker-news.firebaseio.com/v0/topstories.json";
     private static final String ITEM_URL_FORMAT = "https://hacker-news.firebaseio.com/v0/item/%d.json";
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static int GOOD_STATUS = 200;
 
     private HackerNews() {
 
@@ -29,7 +29,7 @@ public final class HackerNews {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == GOOD_STATUS) {
+            if (response.statusCode() == HttpURLConnection.HTTP_OK) {
                 String[] idStrings = response.body().replaceAll("[\\[\\]]", "").split(",");
                 long[] ids = new long[idStrings.length];
 
@@ -56,7 +56,7 @@ public final class HackerNews {
 
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() == GOOD_STATUS) {
+            if (response.statusCode() == HttpURLConnection.HTTP_OK) {
                 String json = response.body();
                 Pattern pattern = Pattern.compile("\"title\":\"(.*?)\"");
                 Matcher matcher = pattern.matcher(json);

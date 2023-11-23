@@ -2,6 +2,9 @@ package edu.hw6.Task6;
 
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +13,7 @@ public final class PortScanner {
     private final static Logger LOGGER = LogManager.getLogger();
     private final static String HEADER = "Протокол  Порт   Используется  Сервис";
     private final static int MAX_PORT = 49151;
+    private static List<PortsInfo> portsInfoList = new ArrayList<>();
     private final static Map<Integer, String> KNOWN_PORTS = Map.of(
         135, "EPMAP",
         137, "Служба имен NetBIOS",
@@ -30,69 +34,36 @@ public final class PortScanner {
     private PortScanner() {
     }
 
-    public static boolean isTcpPortUsed(int port) {
+    private static void scanPorts(int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            return false;
+            serverSocket.close();
         } catch (Exception e) {
-            return true;
+            portsInfoList.add(tracePort(Protocol.TCP, port));
         }
-    }
 
-    public static void scanTcpPorts() {
-        LOGGER.info(HEADER);
-        for (int port = 0; port <= MAX_PORT; port++) {
-            boolean isUsed = isTcpPortUsed(port);
-            tracePort(Protocol.TCP, port, isUsed);
-        }
-    }
-
-    public static boolean isUdpPortUsed(int port) {
-        try (DatagramSocket datagramSocket = new DatagramSocket(port)) {
-            return false;
+        try (DatagramSocket datagramSocket = new DatagramSocket(port);) {
+            datagramSocket.close();
         } catch (Exception e) {
-            return true;
+            portsInfoList.add(tracePort(Protocol.UDP, port));
         }
     }
 
-    public static void scanUdpPorts() {
-        LOGGER.info(HEADER);
-        for (int port = 0; port <= MAX_PORT; port++) {
-            boolean isUsed = isUdpPortUsed(port);
-            tracePort(Protocol.UDP, port, isUsed);
-        }
-    }
-
-    private static void tracePort(Protocol protocol, int port, boolean isUsed) {
+    private static PortsInfo tracePort(Protocol protocol, int port) {
         String process = KNOWN_PORTS.getOrDefault(port, "");
-
-        LOGGER.info(String.format(
-            "%-4s  %-5d  %-12s  %-30s",
-            protocol.toString(),
-            port,
-            isUsed ? "Да" : "Нет",
-            process
-        ));
+        return new PortsInfo(protocol.toString(), port, process);
     }
 
-    private static void tracePortTrue() {
-        for (int port = 0; port <= MAX_PORT; port++) {
-            String process = KNOWN_PORTS.getOrDefault(port, "");
-            boolean isUsed = isTcpPortUsed(port) || isUdpPortUsed(port);
-            String protocol = "";
-            if (isTcpPortUsed(port)) {
-                protocol = Protocol.TCP.toString();
-            }
-            if (isUdpPortUsed(port)) {
-                protocol = Protocol.UDP.toString();
-            }
-            if (isUsed) {
-                LOGGER.info(String.format(
-                    "%-4s  %-5d  %-30s",
-                    protocol,
-                    port,
-                    process
-                ));
-            }
+    public static void PortsOutput() {
+        for (int i = 0; i < MAX_PORT; i++) {
+            scanPorts(i);
         }
+        for (PortsInfo portsInfo : portsInfoList) {
+            LOGGER.info(String.format(
+                    "%-4s  %-5d %-30s", portsInfo.protocol(), portsInfo.port(), portsInfo.process()));
+        }
+    }
+
+    public static void main(String[] args) {
+        PortsOutput();
     }
 }
