@@ -36,7 +36,6 @@ public class Task4Test {
             assertEquals("Programming is learned by writing programs. ― Brian Kernighan", line);
         }
     }
-
     private void createTestFile() {
         try {
             Path filePath = Paths.get(TEST_FILE_PATH.toUri());
