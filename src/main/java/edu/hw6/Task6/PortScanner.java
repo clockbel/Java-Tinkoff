@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 public final class PortScanner {
     private final static Logger LOGGER = LogManager.getLogger();
-    private final static String HEADER = "Протокол  Порт   Используется  Сервис";
+    private final static String HEADER = "Протокол  Порт  Сервис";
     private final static int MAX_PORT = 49151;
     private static List<PortsInfo> portsInfoList = new ArrayList<>();
     private final static Map<Integer, String> KNOWN_PORTS = Map.of(
@@ -53,12 +53,13 @@ public final class PortScanner {
     }
 
     public static void portsOutput() {
+        LOGGER.info(HEADER);
         for (int i = 0; i < MAX_PORT; i++) {
             scanPorts(i);
         }
         for (PortsInfo portsInfo : portsInfoList) {
             LOGGER.info(String.format(
-                    "%-4s  %-5d %-30s", portsInfo.protocol(), portsInfo.port(), portsInfo.process()));
+                    "%-8s  %-5d %-30s", portsInfo.protocol(), portsInfo.port(), portsInfo.process()));
         }
     }
 
