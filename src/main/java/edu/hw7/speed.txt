@@ -21,9 +21,3 @@ Time for multi-threaded, 7 threads: 11 milliseconds
 
 Approximated Pi (multi-threaded): 3.145656
 Time for multi-threaded, 8 threads: 9 milliseconds
-
-Approximated Pi (multi-threaded): 3.144936
-Time for multi-threaded, 9 threads: 14 milliseconds
-
-Approximated Pi (multi-threaded): 3.143132
-Time for multi-threaded, 10 threads: 13 milliseconds
