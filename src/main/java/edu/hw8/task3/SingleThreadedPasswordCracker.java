@@ -6,9 +6,9 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static edu.hw8.task3.PasswordsFunctions.calculateString;
-import static edu.hw8.task3.PasswordsFunctions.nextPassword;
 import static edu.hw8.task3.PasswordsFunctions.getUsernameByHash;
 import static edu.hw8.task3.PasswordsFunctions.md5Hash;
+import static edu.hw8.task3.PasswordsFunctions.nextPassword;
 
 public final class SingleThreadedPasswordCracker {
     private static Map<String, String> passwordDatabase;
