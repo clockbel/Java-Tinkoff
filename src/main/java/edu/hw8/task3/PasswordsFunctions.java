@@ -39,7 +39,7 @@ public final class PasswordsFunctions {
         return null;
     }
 
-    public static String generatePasswords(int length, char[] basePassword) {
+    public static String nextPassword(int length, char[] basePassword) {
         char[] characters = SYMBOLS_FOR_PASSWORD.toCharArray();
         StringBuilder password = new StringBuilder(length);
         return gen(password, length, basePassword, characters);

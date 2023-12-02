@@ -6,7 +6,7 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static edu.hw8.task3.PasswordsFunctions.calculateString;
-import static edu.hw8.task3.PasswordsFunctions.generatePasswords;
+import static edu.hw8.task3.PasswordsFunctions.nextPassword;
 import static edu.hw8.task3.PasswordsFunctions.getUsernameByHash;
 import static edu.hw8.task3.PasswordsFunctions.md5Hash;
 
@@ -30,7 +30,7 @@ public final class SingleThreadedPasswordCracker {
                 crackDatabase.put(username, password);
                 passwordDatabase.remove(username, hash);
             }
-            password = generatePasswords(lengthPassword, password.toCharArray());
+            password = nextPassword(lengthPassword, password.toCharArray());
             if (Objects.equals(password, calculateString(lengthPassword, "9"))) {
                 lengthPassword += 1;
                 password = calculateString(lengthPassword, "a");
