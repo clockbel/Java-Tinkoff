@@ -1,0 +1,23 @@
+Approximated Pi (multi-threaded): 3.142848
+Time for multi-threaded, 1 threads: 79 milliseconds
+
+Approximated Pi (multi-threaded): 3.140796
+Time for multi-threaded, 2 threads: 34 milliseconds
+
+Approximated Pi (multi-threaded): 3.14116
+Time for multi-threaded, 3 threads: 21 milliseconds
+
+Approximated Pi (multi-threaded): 3.142148
+Time for multi-threaded, 4 threads: 15 milliseconds
+
+Approximated Pi (multi-threaded): 3.140556
+Time for multi-threaded, 5 threads: 14 milliseconds
+
+Approximated Pi (multi-threaded): 3.139136
+Time for multi-threaded, 6 threads: 12 milliseconds
+
+Approximated Pi (multi-threaded): 3.140844
+Time for multi-threaded, 7 threads: 11 milliseconds
+
+Approximated Pi (multi-threaded): 3.145656
+Time for multi-threaded, 8 threads: 9 milliseconds
