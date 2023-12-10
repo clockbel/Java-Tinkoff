@@ -1,47 +1,41 @@
 package edu.hw9.task3;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class SolverDFS {
-    private SolverDFS() {
 
+    private SolverDFS() {
     }
 
     private static final int[][] DIRECTIONS = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-    private static final int THREAD_POOL_SIZE = 4; // Adjust the number of threads as needed
-    private final static Logger LOGGER = LogManager.getLogger();
+    private static final int THREADS_NUM = 4;
+    private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(THREADS_NUM);
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static List<Coordinate> findPath(int[][] maze, Coordinate start, Coordinate end) {
         if (validInput(maze, start, end)) {
             return new ArrayList<>();
         }
 
-        ExecutorService executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-        List<Coordinate> path = Collections.synchronizedList(new ArrayList<>());
-
+        boolean[][] visited = new boolean[maze.length][maze[0].length];
+        List<Coordinate> path = new ArrayList<>();
         try {
-            boolean[][] visited = new boolean[maze.length][maze[0].length];
-            List<Future<Boolean>> futures = new ArrayList<>();
-            futures.add(executorService.submit(() ->
-                dfs(maze, start, end, visited, path)
-            ));
-            for (Future<Boolean> future : futures) {
-                if (future.get()) {
-                    break;
-                }
-            }
-            Collections.reverse(path);
-        } catch (InterruptedException | ExecutionException e) {
+            EXECUTOR_SERVICE.invokeAll(List.of((Callable<Boolean>) () -> dfs(maze, start, end, visited, path)));
+        } catch (InterruptedException e) {
             LOGGER.info(e.getMessage());
-        } finally {
-            executorService.shutdown();
         }
 
+        if (!path.isEmpty()) {
+            Collections.reverse(path);
+        }
         return path;
     }
 

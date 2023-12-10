@@ -1,7 +1,7 @@
 package edu.hw9.task1;
 
-
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,17 +15,14 @@ import org.apache.logging.log4j.Logger;
 public class StatsCollector {
     private final Map<String, List<Double>> metrics = new ConcurrentHashMap<>();
     private final static Logger LOGGER = LogManager.getLogger();
+
     public void push(String metricName, double[] values) {
-        metrics.compute(metricName, (key, existingValues) -> {
-            if (existingValues == null) {
-                existingValues = new ArrayList<>();
-            }
-            for (double value : values) {
-                existingValues.add(value);
-            }
+        metrics.merge(metricName, Arrays.stream(values).boxed().toList(), (existingValues, newValues) -> {
+            existingValues.addAll(newValues);
             return existingValues;
         });
     }
+
     public List<Statistic> stats() {
         List<Statistic> results = new ArrayList<>();
 

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class Task3Test {
     @Test
-    @DisplayName("TestSolver2")
-    public void Test2() {
+    @DisplayName("TestSolver")
+    public void Test1() {
         int[][] maze = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -62,8 +62,8 @@ public class Task3Test {
         assertThat(flag).isTrue();
     }
     @Test
-    @DisplayName("TestSolver4")
-    public void Test4() {
+    @DisplayName("IncorrectTestSolver")
+    public void Test2() {
         int[][] maze = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1},
