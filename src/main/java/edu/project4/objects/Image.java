@@ -2,6 +2,9 @@ package edu.project4.objects;
 
 public record Image(Pixel[][] data, int width, int height) {
     public static Image create(int width, int height) {
+        if (width <= 0 || height <= 0) {
+            throw new IllegalArgumentException("Incorrect width or height");
+        }
         Pixel[][] data = new Pixel[height][width];
         for (int i = 0; i < height; ++i) {
             for (int j = 0; j < width; ++j) {

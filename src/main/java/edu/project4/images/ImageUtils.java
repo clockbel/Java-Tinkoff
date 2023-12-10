@@ -3,35 +3,40 @@ package edu.project4.images;
 import edu.project4.objects.Image;
 import edu.project4.objects.Pixel;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import javax.imageio.ImageIO;
 
 public final class ImageUtils {
-    private static final int BIG_SHIFT = 16;
-    private static final int MED_SHIFT = 8;
+    private static final int MAX = 255;
+    private static final int A = 24;
+    private static final int R = 16;
+    private static final int G = 8;
+    private static final int BLACK = MAX << A;
 
     private ImageUtils() {
     }
 
-    public static void save(Image image, Path filename, ImageFormat format) {
-        try {
-            ImageIO.write(imgToBufferedImage(image), format.name().toUpperCase(), filename.toFile());
-        } catch (IOException ignored) {
-        }
-    }
+    public static void save(Image image, String filename, ImageFormat format) {
+        BufferedImage bufferedImage = new BufferedImage(image.width(), image.height(), BufferedImage.TYPE_INT_ARGB);
 
-    private static BufferedImage imgToBufferedImage(Image image) {
-        BufferedImage bi = new BufferedImage(image.width(), image.height(), BufferedImage.TYPE_INT_RGB);
-
-        for (int i = 0; i < image.height(); i++) {
-            for (int j = 0; j < image.width(); j++) {
-                Pixel pixel = image.pixel(j, i);
-                bi.setRGB(j, i, (pixel.r() << BIG_SHIFT) + (pixel.g() << MED_SHIFT) + pixel.b());
+        for (int x = 0; x < image.width(); ++x) {
+            for (int y = 0; y < image.height(); ++y) {
+                Pixel pixel = image.pixel(x, y);
+                if (pixel.hitCount() == 0) {
+                    bufferedImage.setRGB(x, y, BLACK);
+                    continue;
+                }
+                int color = (MAX << A) | (pixel.r() << R) | (pixel.g() << G) | pixel.b();
+                bufferedImage.setRGB(x, y, color);
             }
         }
-        return bi;
+
+        File outputFile = new File(filename);
+        try {
+            ImageIO.write(bufferedImage, format.name(), outputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
 }
